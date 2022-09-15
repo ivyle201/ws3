@@ -1,0 +1,96 @@
+Script started on 2022-09-14 22:05:56-04:00
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ 
+
+
+----------------------------------------------------------------------------------------------------------------
+Sort the customer IDs in order to find the customer who authored the most reviews.
+Which customers are the top 3 reviewers (with the most reviews)?
+
+50122160 -> line count: 21922 -> #1 reviewer
+50732546 -> line count: 9964 ->  #2 reviewer
+52615377 -> line count: 2664 ->  #3 reviewer
+------------------------------------------------------------------------------------------------------------------
+
+
+[vivian@sjsu ~]$ cut -f 2 > customer_id.txt 
+^C
+[vivian@sjsu ~]$ cut -f 2 amazon_reviews_us_Books_v1_02.tsv > customer_id.txt
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ cat customer_id.txt | head -n 4
+customer_id
+12076615
+12703090
+12257412
+[vivian@sjsu ~]$ sort customer_id.txt | uniq -c | sed 's/^[ \t]*//' | sort -n > sorted_customer_id.txt
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ cat sorted_customer_id.txt | head -n 4
+1 12065385
+1 12066099
+1 12066297
+1 12066432
+[vivian@sjsu ~]$ sort customer_id.txt | uniq -c | sed 's/^[ \t]*//' | sort -n | tail -n +2 > sorted_customer_id.txt
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ cat sorted_customer_id.txt | tail -10
+1384 49693975
+1416 39569598
+1622 45273033
+1643 20595117
+1786 50913245
+1797 50776149
+2215 45041039
+2664 52615377
+9964 50732546
+21922 50122160
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ grep 50122160 amazon_reviews_us_Books_v1_02.tsv | wc 
+  21922 2995718 19456806
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ 
+
+
+----------------------------------------------------------------------------------------------------------------------
+Sort the products in order to find the product that has the most reviews.
+What are the top 3 most reviewed products?
+
+
+4625 043935806X Harry Potter and the Order of the Phoenix (Book 5)      Books.  ->  top reviewed 1
+3739 0439139597 Harry Potter And The Goblet Of Fire (Book 4)    Books.          ->  top reviewed 2
+2666 0525947647 Lies and the Lying Liars Who Tell Them  Books                   ->  top reviewed 3
+-----------------------------------------------------------------------------------------------------------------------
+
+[vivian@sjsu ~]$ cut -f 4,6,7 amazon_reviews_us_Books_v1_02.tsv > product_id.txt 
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ cat product_id.txt | head -n 4
+product_id	product_title	product_category
+0385730586	Sisterhood of the Traveling Pants (Book 1)	Books
+0811828964	The Bad Girl's Guide to Getting What You Want	Books
+1844161560	Eisenhorn (A Warhammer 40,000 Omnibus)	Books
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ sort product_id.txt | uniq -c | sed 's/^[ \t]*//' | sort -n | tail -n +2 > sorted_product_id.txt 
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ cat sorted_product_id.txt | tail -10
+1772 0312864590	Crossroads of Twilight (The Wheel of Time, Book 10)	Books
+1795 1400050308	Treason: Liberal Treachery from the Cold War to the War on Terrorism	Books
+2024 0316666343	The Lovely Bones	Books
+2052 0439784549	Harry Potter and the Half-Blood Prince (Book 6)	Books
+2366 0590353403	Harry Potter And The Sorcerer's Stone	Books
+2584 0385504209	The Da Vinci Code	Books
+2615 0895260174	Unfit For Command: Swift Boat Veterans Speak Out Against John Kerry	Books
+2666 0525947647	Lies and the Lying Liars Who Tell Them	Books
+3739 0439139597	Harry Potter And The Goblet Of Fire (Book 4)	Books
+4625 043935806X	Harry Potter and the Order of the Phoenix (Book 5)	Books
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ history > cmds.log
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ 
+[vivian@sjsu ~]$ exit
+
+Script done on 2022-09-14 22:19:29-04:00
